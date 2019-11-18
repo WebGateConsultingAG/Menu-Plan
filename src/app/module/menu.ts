@@ -1,8 +1,9 @@
-import { Type } from '@angular/compiler';
+import {Types} from './types';
 
-export class Menu{
-  title:string;
+export class Menu {
+  id: string;
+  title: string;
   description: string;
   date: Date;
-  type: Type;
+  type: Types;
 }

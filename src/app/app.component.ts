@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import {Day} from './module/day';
 import {MenuService} from './services/menu.service';
-import {getNumberOfCurrencyDigits} from '@angular/common';
+import {Menu} from './module/menu';
+import {MatDialog} from '@angular/material';
+import {FormDialogComponent} from './components/form-dialog/form-dialog.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,7 +14,7 @@ export class AppComponent implements OnInit {
   title = 'menu-plan';
   days: Day[] = [];
 
-  constructor(private menuService: MenuService) {}
+  constructor(private menuService: MenuService, public dialog: MatDialog) {}
 
   ngOnInit() {
     moment.locale('de');
@@ -28,7 +30,20 @@ export class AppComponent implements OnInit {
   }
 
   getMenus() {
-    this.menuService.getMenus().subscribe(menus => {});
+    this.menuService.getMenus().subscribe((menus: Menu[]) => {
+      menus.forEach(menu => {
+        this.addMenuToDays(menu);
+      });
+    });
+  }
+
+  addMenuToDays(menu: Menu) {
+    const momentDate = moment(menu.date);
+    for (let i = 0; i < this.days.length; i++) {
+      if (this.days[i].date.format('DD.MM.YYYY') === momentDate.format('DD.MM.YYYY')) {
+        this.days[i].menus.push(menu);
+      }
+    }
   }
 
   getStartDate() {
@@ -60,5 +75,13 @@ export class AppComponent implements OnInit {
   //Display Functions
   getLineTitle(date: moment.Moment) {
     return date.format('dd: DD.MM.YYYY');
+  }
+
+  openDialog(menu: Menu) {
+    this.dialog.open(FormDialogComponent, {
+      data: {
+        menu: menu
+      }
+    });
   }
 }

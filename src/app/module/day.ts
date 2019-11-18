@@ -1,6 +1,7 @@
-import { Moment } from 'moment';
+import {Moment} from 'moment';
+import {Menu} from './menu';
 
-export class Day{
+export class Day {
   date: Moment;
-  menus: [];
+  menus: Menu[];
 }
