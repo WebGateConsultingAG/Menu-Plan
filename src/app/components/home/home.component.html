@@ -1,0 +1,23 @@
+<div class="row" *ngIf="isAdmin">
+  <div class="col-md-12">
+    <button mat-button (click)="openDialog()">New Menu</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-2" *ngFor="let day of days">
+    <mat-card class="menu">
+      <mat-card-title>{{ getLineTitle(day.date) }}</mat-card-title>
+      <mat-card-content>
+        <div *ngFor="let menu of day.menus">
+          <mat-divider></mat-divider>
+          <h4>{{ menu.title }}</h4>
+          <h6>{{ menu.type }}</h6>
+          <div>{{ menu.description }}</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col-md-1"></div>
+</div>

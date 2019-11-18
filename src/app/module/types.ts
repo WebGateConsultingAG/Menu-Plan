@@ -1,5 +1,5 @@
 export enum Types {
-  DESERT = "desert",
-  MAIN = "main",
-  FIRST = "first"
+  DESSERT = "Dessert",
+  MAIN = "Hauptspeise",
+  FIRST = "Vorspeise"
 }

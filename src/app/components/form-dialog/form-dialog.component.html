@@ -1,27 +1,25 @@
-<h2 mat-dialog-title>{{getDialogTitle()}}</h2>
-<form [formGroup]="form">
-  <label>
-    Titel:
-    <input type="text" formControlName="title">
-  </label>
-  <label>
-    Datum:
-    <input type="date" formControlName="date">
-  </label>
-  <label>
-    Type:
-    <select formControlName="type">
-      <option *ngFor="let type of types | keyvalue" value="type.value">
-        {{type.value}}
-      </option>
-    </select>
-  </label>
-  <label>
-    Bebschreibung;
-    <textarea formControlName="description"></textarea>
-  </label>
+<h2 mat-dialog-title>{{ getDialogTitle() }}</h2>
+<form [formGroup]="form" class="dialogForm">
+  <mat-form-field>
+    <input matInput placeholder="Titel" type="text" formControlName="title" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Datum" type="date" formControlName="date" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select formControlName="type" required>
+      <mat-option value="Vorspeise">Vorspeise</mat-option>
+      <mat-option value="Hauptspeise">Hauptspeise</mat-option>
+      <mat-option value="Dessert">Dessert</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
 </form>
 <mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="true" (click)="saveForm()">speichern</button>
+  <button mat-button [mat-dialog-close]="true" (click)="save()">
+    speichern
+  </button>
   <button mat-button [mat-dialog-close]="true">abbrechen</button>
 </mat-dialog-actions>
