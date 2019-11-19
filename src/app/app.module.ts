@@ -14,7 +14,9 @@ import {
   MatButtonModule,
   MatFormFieldModule,
   MatSelectModule,
-  MatInputModule
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from "@angular/material";
 import { HttpClientModule } from "@angular/common/http";
 import { HomeComponent } from "./components/home/home.component";
@@ -41,6 +43,8 @@ import { environment } from "src/environments/environment";
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     AwsAuthenticatorModule.forRoot({
       userPoolId: environment.auth.userPoolId,
       clientId: environment.auth.clientId,

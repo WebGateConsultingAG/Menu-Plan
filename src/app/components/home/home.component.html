@@ -1,6 +1,6 @@
 <div class="row" *ngIf="isAdmin">
   <div class="col-md-12">
-    <button mat-button (click)="openDialog()">New Menu</button>
+    <button mat-button (click)="openDialog(null)">New Menu</button>
   </div>
 </div>
 <div class="row">
@@ -10,10 +10,17 @@
       <mat-card-title>{{ getLineTitle(day.date) }}</mat-card-title>
       <mat-card-content>
         <div *ngFor="let menu of day.menus">
-          <mat-divider></mat-divider>
-          <h4>{{ menu.title }}</h4>
-          <h6>{{ menu.type }}</h6>
-          <div>{{ menu.description }}</div>
+          <mat-divider class="divider"></mat-divider>
+          <div class="footBox">
+            <h4>{{ menu.title }}</h4>
+            <h6>{{ menu.type }}</h6>
+            <div>{{ menu.description }}</div>
+          </div>
+          <div *ngIf="isAdmin">
+            <button (click)="openDialog(menu)" mat-button color="primary">
+              bearbeiten
+            </button>
+          </div>
         </div>
       </mat-card-content>
     </mat-card>

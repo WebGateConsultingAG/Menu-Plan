@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA } from "@angular/material";
 import { Menu } from "src/app/module/menu";
 import { FormGroup, FormControl } from "@angular/forms";
 import { MenuService } from "src/app/services/menu.service";
+import * as moment from "moment";
 
 @Component({
   selector: "app-form-dialog",
@@ -10,10 +11,12 @@ import { MenuService } from "src/app/services/menu.service";
   styleUrls: ["./form-dialog.component.scss"]
 })
 export class FormDialogComponent implements OnInit {
-  @Inject(MAT_DIALOG_DATA) public data: any;
   form: FormGroup;
   menu: Menu;
-  constructor(private menuService: MenuService) {}
+  constructor(
+    private menuService: MenuService,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   ngOnInit() {
     if (this.data && this.data.menu) {
@@ -40,6 +43,11 @@ export class FormDialogComponent implements OnInit {
 
   save() {
     const toSave: Menu = this.form.value;
-    this.menuService.saveMenu(toSave);
+    moment.locale("de");
+    const date = moment(toSave.date);
+    toSave.date = date.format("YYYY-MM-DD");
+    this.menuService.saveMenu(toSave).then(request => {
+      location.reload();
+    });
   }
 }
